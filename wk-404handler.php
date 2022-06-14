@@ -37,7 +37,7 @@ function wk_redirect(){
     // print_r($url_items);
     // echo '</pre>';
     
-    //wp_die();
+    // wp_die();
     
     if(is_array($url_items) && count($url_items) > 0){
         foreach($url_items as $item){
@@ -57,7 +57,11 @@ function wk_redirect(){
         }
     }
     
+    //  echo '<pre>';
+    // print_r($params);
+    // echo '</pre>';
     
+    // wp_die();
     
     if(count($params) > 0 ){
         
@@ -65,14 +69,14 @@ function wk_redirect(){
         $params = array_unique($params);
         
         //Just take first three sets if available
-        $search_query = "SELECT ID FROM {$wpdb->prefix}posts WHERE ( post_name LIKE '%{$params[0]}%' AND post_status='publish') ";
+        $search_query = "SELECT ID FROM {$wpdb->prefix}posts WHERE ( post_name LIKE '%{$params[0]}%' AND ( post_status='publish' AND post_type='product' )) ";
         
         if(count($params) > 1){
             foreach($params as $key => $param){
                 if($key == 0){
                     continue;
                 }
-                $search_query .= " OR ( post_name LIKE '%".$param."%' AND post_status='publish') ";
+                $search_query .= " OR ( post_name LIKE '%".$param."%' AND (post_status='publish' AND post_type='product' )) ";
             } 
         }                             
              
@@ -81,28 +85,22 @@ function wk_redirect(){
         
         
         $results = $wpdb->get_results($search_query);
-
-        // echo '<pre>';
-        // print_r($results);
-        // echo '</pre>';
-        
         
         if(is_array($results) &&  count($results) > 0){
             //We have found match
             $goto = wk_set_goto_product($results);
             
-
         }else{
             //No match on post_name, let's try post_title 
             
-            $search_query = "SELECT ID FROM {$wpdb->prefix}posts WHERE ( post_name LIKE '%{$params[0]}%' AND post_status='publish') ";
+            $search_query = "SELECT ID FROM {$wpdb->prefix}posts WHERE ( post_name LIKE '%{$params[0]}%' AND ( post_status='publish' AND post_type='product' )) ";
         
             if(count($params) > 1){
                 foreach($params as $key => $param){
                     if($key == 0){
                         continue;
                     }
-                    $search_query .= " OR ( post_name LIKE '%".$param."%' AND post_status='publish') ";
+                    $search_query .= " OR ( post_name LIKE '%".$param."%' AND (post_status='publish' AND post_type='product' )) ";
                 } 
             }                             
                  
@@ -120,15 +118,12 @@ function wk_redirect(){
             }else{
                 //Try finding in the category now 
                 $term = false;
-                
                foreach($params as $param){
                    $term = get_term_by('name', $param,'product_cat');
                    
-                   //var_dump($term);
-                   
                    if(!$term){
                        $term = get_term_by('slug', $param,'product_cat');
-                       //var_dump($term);
+                       
                        if(!$term){
                            continue;
                        }else{
@@ -139,14 +134,19 @@ function wk_redirect(){
                    }
                    
                }
-               
+                var_dump(gettype($term));
+    
                if($term){
                    //We have found something, get the term 
                    $goto = get_term_link($term);
                    
                }else{
+                   
+                   echo 'test';
                    $goto = get_site_url();
                }
+               
+               //wp_die();
                    
             }
         }
@@ -209,5 +209,3 @@ function wk_handle_404(){
         // Who cares?
     }
 }
-
-
