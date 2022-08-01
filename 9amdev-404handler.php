@@ -1,7 +1,7 @@
 <?php 
 /**
  * Plugin Name: 404 to 301 for Woocommerce products
- * Plugin URI:        http://9amdev.com/plugins/9amdev-woo404handler
+ * Plugin URI:  https://github.com/imranshuvo/9amdev-woo404handler
  * Description: This plugin redirects any 404 on woocommerce products url to it's similar product url or the related category url. If similar url or category url is not found, it will redirect to the homepage
  * Version:           1.0.0
  * Requires at least: 5.2
@@ -146,12 +146,6 @@ function nineamdev_redirect(){
         
         $goto = get_site_url();
     }
-    
-    // echo '<pre>';
-    // print_r($goto);
-    // echo '</pre>';
-
-    // wp_die();
 
     if (!empty($goto)) {
         //Note: Giving Google a 301 response for updating the URL in their DB
@@ -197,6 +191,6 @@ function nineamdev_handle_404(){
         exit();
 
     } catch ( Exception $ex ) {
-        // Who cares?
+        // should 
     }
 }
