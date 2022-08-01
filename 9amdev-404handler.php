@@ -1,25 +1,28 @@
 <?php 
 /**
  * Plugin Name: 404 to 301 for Woocommerce products
+ * Plugin URI:        http://9amdev.com/plugins/9amdev-woo404handler
  * Description: This plugin redirects any 404 on woocommerce products url to it's similar product url or the related category url. If similar url or category url is not found, it will redirect to the homepage
- * Plugin URI : https://9amdev.com
- * Version: 1.1
- * Author: 9amdev
- * Author URI: https://9amdev.com
- * License: GPLv2.0
- * Text Domain: wk-404handler
+ * Version:           1.0.0
+ * Requires at least: 5.2
+ * Requires PHP:      7.2
+ * Author:            9amdev
+ * Author URI:        http://9amdev.com
+ * License:           GPL v2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: 9amdev-woo404handler
  */
 
 
-add_action('init','wk_trigger_404_handler');
+add_action('init','nineamdev_trigger_404_handler');
 
-function wk_trigger_404_handler(){
-    add_action( 'template_redirect','wk_handle_404' );
+function nineamdev_trigger_404_handler(){
+    add_action( 'template_redirect','nineamdev_handle_404' );
 }
 
 
 //redirect function
-function wk_redirect(){
+function nineamdev_redirect(){
     global $wpdb;
 
     //Note: Strip these words
@@ -32,12 +35,6 @@ function wk_redirect(){
     $url = str_replace($search, "", $url);
     
     $url_items = explode("/", $url);
-    
-    // echo '<pre>';
-    // print_r($url_items);
-    // echo '</pre>';
-    
-    // wp_die();
     
     if(is_array($url_items) && count($url_items) > 0){
         foreach($url_items as $item){
@@ -56,12 +53,6 @@ function wk_redirect(){
             }
         }
     }
-    
-    //  echo '<pre>';
-    // print_r($params);
-    // echo '</pre>';
-    
-    // wp_die();
     
     if(count($params) > 0 ){
         
@@ -88,7 +79,7 @@ function wk_redirect(){
         
         if(is_array($results) &&  count($results) > 0){
             //We have found match
-            $goto = wk_set_goto_product($results);
+            $goto = nineamdev_set_goto_product($results);
             
         }else{
             //No match on post_name, let's try post_title 
@@ -111,7 +102,7 @@ function wk_redirect(){
             
             if(is_array($results) && count($results) > 0){
                 //We have found match
-                $goto = wk_set_goto_product($results);
+                $goto = nineamdev_set_goto_product($results);
                 
                  //echo 'Found Second';
                 
@@ -134,7 +125,7 @@ function wk_redirect(){
                    }
                    
                }
-                var_dump(gettype($term));
+                //var_dump(gettype($term));
     
                if($term){
                    //We have found something, get the term 
@@ -172,7 +163,7 @@ function wk_redirect(){
 }
 
 
-function wk_set_goto_product($id_arr) {
+function nineamdev_set_goto_product($id_arr) {
     
     if(is_array($id_arr) && count($id_arr) > 0){
 
@@ -193,7 +184,7 @@ function wk_set_goto_product($id_arr) {
     return $goto;
 }
 
-function wk_handle_404(){
+function nineamdev_handle_404(){
     // Only if we can.
     if ( ! is_404() || is_admin() ) {
         return;
@@ -202,7 +193,7 @@ function wk_handle_404(){
     // Let's try folks.
     try {
 
-        wk_redirect();
+        nineamdev_redirect();
         exit();
 
     } catch ( Exception $ex ) {
