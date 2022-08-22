@@ -1,6 +1,6 @@
 <?php 
 /**
- * Plugin Name: 404 to 301 for Woocommerce products
+ * Plugin Name: 404 to 301 for Woo products url
  * Plugin URI:  https://github.com/imranshuvo/9amdev-woo404handler
  * Description: This plugin redirects any 404 on woocommerce products url to it's similar product url or the related category url. If similar url or category url is not found, it will redirect to the homepage
  * Version:           1.0.0
@@ -12,6 +12,32 @@
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: 9amdev-woo404handler
  */
+
+
+add_action('plugins_loaded','nineamdev_woo404handler_activation_logic');
+
+//register_activation_hook(__FILE__, 'nineamdev_woo404handler_activation_logic');
+
+function nineamdev_woo404handler_activation_logic(){
+    if(!class_exists('woocommerce')){
+        add_action('admin_notices','nineamdev_show_woocommerce_not_avaialble_message');
+        add_action('admin_init','nineamdev_deactivate_plugin');
+
+    }
+
+}
+
+function nineamdev_deactivate_plugin(){
+    deactivate_plugins(plugin_basename(__FILE__));
+}
+
+function nineamdev_show_woocommerce_not_avaialble_message(){
+    ?>
+    <div class="notice notice-error is-dismissible">
+        <p><?php _e( '<strong>404 to 301 for Woo products url</strong> requires Woocommerce to be installed and activated! <strong>Plugin deactivated</strong>!', '9amdev-woo404handler' ); ?></p>
+    </div>
+    <?php
+}
 
 
 add_action('init','nineamdev_trigger_404_handler');
