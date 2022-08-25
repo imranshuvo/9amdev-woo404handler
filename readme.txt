@@ -18,8 +18,14 @@ Additionally you can also manually install this plugin by downloading the zip fi
 What this plugin do ?
 -> This plugin will redirect any 404 ( not found ) woocommerce proudcts url to it\'s similar ( matching in slug ) other product url or related product category page. 
 
-Does it redirect any 404 ?
+Does it redirect any 404 url?
 -> No. It will only work on products that returns 404 not found error. 
+
+My Site language is not in English. Will it work here ?
+-> This plugin requires the product and category permalinks to be default 'product','category','product-category','shop' which are in English. 
+
+Will you support site's that are in another language ?
+-> Please reach out to us so that we can update the plugin to include your preferred language version as well. We'll eventually roll out versions that supports all languages.
 
 == Changelog ==
 1.0.0 Automatic 404 to 301 implementation on product urls

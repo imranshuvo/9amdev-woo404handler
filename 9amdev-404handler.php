@@ -52,12 +52,12 @@ function nineamdev_redirect(){
     global $wpdb;
 
     //Note: Strip these words
-    $search = array('produkt', 'product', 'kategori', 'category', 'detail','vare');
+    $search = array('product','category');
     $params = array();
     $goto = '';
     
     //getting the request_uri 
-    $url = strtolower(urldecode($_SERVER['REQUEST_URI']));
+    $url = strtolower(urldecode(sanitize_url($_SERVER['REQUEST_URI'])));
     $url = str_replace($search, "", $url);
     
     $url_items = explode("/", $url);
