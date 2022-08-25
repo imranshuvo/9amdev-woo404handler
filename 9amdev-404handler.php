@@ -7,7 +7,7 @@
  * Requires at least: 5.2
  * Requires PHP:      7.2
  * Author:            9amdev
- * Author URI:        http://9amdev.com
+ * Author URI:        https://9amdev.com
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: 9amdev-woo404handler
@@ -52,7 +52,7 @@ function nineamdev_redirect(){
     global $wpdb;
 
     //Note: Strip these words
-    $search = array('product','category');
+    $search = array('product','category','product-category','shop');
     $params = array();
     $goto = '';
     
