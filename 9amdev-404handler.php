@@ -159,12 +159,10 @@ function nineamdev_redirect(){
                    
                }else{
                    
-                   echo 'test';
+                   //echo 'test';
                    $goto = get_site_url();
                }
-               
-               //wp_die();
-                   
+                                  
             }
         }
         
