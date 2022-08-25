@@ -22,10 +22,8 @@ Does it redirect any 404 url?
 -> No. It will only work on products that returns 404 not found error. 
 
 My Site language is not in English. Will it work here ?
--> This plugin requires the product and category permalinks to be default 'product','category','product-category','shop' which are in English. 
+-> It should work on any matching product urls. If it doesn't work for your site, please reach out to us in the support section. We'll get back to you promptly with a solution. 
 
-Will you support site's that are in another language ?
--> Please reach out to us so that we can update the plugin to include your preferred language version as well. We'll eventually roll out versions that supports all languages.
 
 == Changelog ==
 1.0.0 Automatic 404 to 301 implementation on product urls
