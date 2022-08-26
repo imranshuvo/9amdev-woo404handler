@@ -1,7 +1,7 @@
 <?php 
 /**
  * Plugin Name: 404 to 301 for products url on WooCommerce
- * Plugin URI:  https://github.com/imranshuvo/9amdev-woo404handler
+ * Plugin URI:  https://wordpress.org/plugins/404-to-301-for-woo-products-url
  * Description: This plugin redirects any 404 on woocommerce products url to it's similar product url or the related category url. If similar url or category url is not found, it will redirect to the homepage
  * Version:           1.0.0
  * Requires at least: 5.2
